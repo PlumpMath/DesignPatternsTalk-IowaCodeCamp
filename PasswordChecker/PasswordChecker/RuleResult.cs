@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace PasswordChecker
 {
+
+    /// <summary>
+    /// Result class used by the Password checkers in this demo.  Encapsulates if the password 
+    /// passed all of the rules and if it didn't pass, any error messages related to why it 
+    /// did not pass
+    /// </summary>
     public class RuleResult
     {
         private RuleResult()

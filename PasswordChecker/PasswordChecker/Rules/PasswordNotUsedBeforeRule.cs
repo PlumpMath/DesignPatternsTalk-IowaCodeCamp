@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 
 namespace PasswordChecker.Rules
 {
+
+    /// <summary>
+    /// A Rule that says a user cannot re-use a password they previously used
+    /// </summary>
     public class PasswordNotUsedBeforeRule : IPasswordRule
     {
 
+        /// <summary>
+        /// Returns false--If this rule fails we still want to continue checking other rules
+        /// </summary>
         public bool BreakOnFailure { get { return false; } }
 
 
+        /// <summary>
+        /// Implementation of rule that 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public RuleResult CheckPassword(string username, string password)
         {
             if (this.HasPasswordBeenUsedBefore(username, password))
@@ -23,6 +36,17 @@ namespace PasswordChecker.Rules
         }
 
 
+        /// <summary>
+        /// Checks to see if this password for this username has been used before
+        /// </summary>
+        /// <remarks>
+        /// This method gets the hashes of the prior passwords used by this user, and then
+        /// cycles through them to see if when you hash this password it matches one of 
+        /// the prior password hashes
+        /// </remarks>
+        /// <param name="username">A String of the username</param>
+        /// <param name="newPassword">A String of the new password</param>
+        /// <returns>True if the password has been used by this user before.  False otherwise</returns>
         internal bool HasPasswordBeenUsedBefore(String username, String newPassword)
         {
             List<PasswordHistory> historicalPasswords = this.GetHistoricalPasswords(username);
@@ -38,6 +62,16 @@ namespace PasswordChecker.Rules
         }
 
 
+        /// <summary>
+        /// Helper method to simulate some previously used passwords
+        /// </summary>
+        /// <remarks>
+        /// In a real application, there would probably be a database table that contained the hashes
+        /// of the prior passwords used by the user, and this method would look up those prior
+        /// password hashes and return them from this method
+        /// </remarks>
+        /// <param name="username">A Strng of the username</param>
+        /// <returns>A list of the hashes of prior passwords the user has used</returns>
         internal List<PasswordHistory> GetHistoricalPasswords(String username)
         {
             return new List<PasswordHistory>()

@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace PasswordChecker
 {
+
+    /// <summary>
+    /// A revised password checker that implements the break on fail logic
+    /// </summary>
+    /// <remarks>
+    /// In this version, you can have rules designated as break on failure, meaning
+    /// if that rule fails, the password checker will stop checking any further rules
+    /// </remarks>
     public class BetterPasswordRuleValidator : IPasswordChecker
     {
 
@@ -23,7 +31,13 @@ namespace PasswordChecker
         }
 
 
-
+        /// <summary>
+        /// Check the password against each rule, and return a summarized result of if the
+        /// password passes those rules or all the rules it failed
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public PasswordResult ValidatePassword(string username, string password)
         {
             List<RuleResult> ruleResults = new List<RuleResult>();

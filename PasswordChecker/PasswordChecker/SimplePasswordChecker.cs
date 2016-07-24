@@ -8,10 +8,27 @@ using System.Threading.Tasks;
 
 namespace PasswordChecker
 {
+
+    /// <summary>
+    /// A simple class to validate that a password meets some rules we have established
+    /// </summary>
+    /// <remarks>
+    /// This class implements a password checker just through using a series of if
+    /// statements in a single method.  While this works, this leaves a lot to be desired
+    /// from a code readability and maintanability point of view.  Most of our rules have
+    /// a similar implementation, but not all -- note the rule about not having your
+    /// username in your password.  Also, if we want to add or reorder these rules, it
+    /// becomes easy to make a mistake when we have all of these if statements like this.
+    /// </remarks> 
     public class SimplePasswordChecker : IPasswordChecker
     {
 
-
+        /// <summary>
+        /// Checks if a password is valid (acceptable) by running it through some rules
+        /// </summary>
+        /// <param name="username">A String of the username the password is for</param>
+        /// <param name="password">A String of the password to be checked</param>
+        /// <returns>A PasswordResult object indicating if the password meets all of the established rules</returns>
         public PasswordResult ValidatePassword(string username, string password)
         {
             PasswordResult results = new PasswordResult();
